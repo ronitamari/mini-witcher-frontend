@@ -8,15 +8,13 @@ import { Chart } from 'chart.js';
 class UserDistributionService {
   constructor(private http: HttpClient) {}
 
-  getAllType = (): types[] => {
-    let AllTypesRes: types[] = [];
+  getAllType = () => {
 
-    this.http
+    return this.http
       .get<types[]>(`${appEnv.baseUrl}users-type/get-all`)
-      .subscribe((buffer) => {
-        AllTypesRes = buffer;
-      });
-    return AllTypesRes;
+      .pipe(
+        map( AllTypesRes => AllTypesRes)
+      );
   };
 
   getDistribution = (alltypes: string[], DATA_COUNT: number) => {
@@ -24,37 +22,37 @@ class UserDistributionService {
       .get<typesAmount[]>(`${appEnv.baseUrl}ad-users/get-users-amount-by-type/`)
       .pipe(
         map((res) => {
-          return res.map((obj) => Number(obj.count));
+          const amountOfAllTypes = res.map((obj) => Number(obj.count));
+          const data = {
+            labels: alltypes,
+            datasets: [
+              {
+                label: 'amount in AD',
+                data: amountOfAllTypes,
+                backgroundColor: Object.values(CHART_COLORS),
+              },
+            ],
+            hoverOffset: DATA_COUNT,
+          };
+    
+          new Chart('PieChart', {
+            type: 'pie',
+            data: data,
+            options: {
+              responsive: true,
+              plugins: {
+                legend: {
+                  position: 'left',
+                },
+                title: {
+                  display: true,
+                },
+              },
+            },
+          });
         })
       )
       .subscribe((amountOfAllTypes) => {
-        const data = {
-          labels: alltypes,
-          datasets: [
-            {
-              label: 'amount in AD',
-              data: amountOfAllTypes,
-              backgroundColor: Object.values(CHART_COLORS),
-            },
-          ],
-          hoverOffset: DATA_COUNT,
-        };
-
-        new Chart('PieChart', {
-          type: 'pie',
-          data: data,
-          options: {
-            responsive: true,
-            plugins: {
-              legend: {
-                position: 'left',
-              },
-              title: {
-                display: true,
-              },
-            },
-          },
-        });
       });
   };
 }

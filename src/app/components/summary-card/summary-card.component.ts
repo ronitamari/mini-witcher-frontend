@@ -23,38 +23,38 @@ import { CommonModule } from '@angular/common';
   styleUrl: './summary-card.component.scss',
 })
 export class SummaryCardComponent {
-  totalUsers: string | Number = '???';
-  disabledUsers: string | Number = '???';
-  activeUsers: string | Number = '???';
-  inactiveUsers$: Observable<Number>;
-  enforcedUsers: string | Number = '???';
-  notEnforcedUsers: string | Number = '???';
+  totalUsers$!: Observable<Number>;
+  disabledUsers$!: Observable<Number>;
+  activeUsers$!: Observable<Number>;
+  inactiveUsers$!: Observable<Number>;
+  enforcedUsers$!:  Observable<Number>;
+  notEnforcedUsers$!: Observable<Number>;
 
-  totalUsersPresent = 0;
-  disabledUsersPresent = 0;
-  activeUsersPresent = 0;
-  inactiveUsersPresent = 0;
-  enforcedUsersPresent = 0;
-  notEnforcedUsersPresent = 0;
+  totalUsersPresent: number = 0;
+  disabledUsersPresent: number = 0;
+  activeUsersPresent: number = 0;
+  inactiveUsersPresent: number = 0;
+  enforcedUsersPresent: number = 0;
+  notEnforcedUsersPresent: number = 0;
 
   constructor(private summaryService: SummaryCardService) {}
 
   async ngOnInit() {
-    this.totalUsers = this.summaryService.getAmountOfUsers();
-    this.totalUsersPresent = 100 / Number(this.totalUsers);
-    this.disabledUsers = this.summaryService.getAmountOfDisabledUsers();
+    this.totalUsers$ = this.summaryService.getAmountOfUsers();
+    this.totalUsersPresent = 100 / Number(this.totalUsers$);
+    this.disabledUsers$ = this.summaryService.getAmountOfDisabledUsers();
     this.disabledUsersPresent =
-      Number(this.disabledUsers) * this.totalUsersPresent;
-    this.activeUsers = this.summaryService.getAmountOfAactiveUsers();
-    this.activeUsersPresent = Number(this.activeUsers) * this.totalUsersPresent;
+      Number(this.disabledUsers$) * this.totalUsersPresent;
+    this.activeUsers$ = this.summaryService.getAmountOfAactiveUsers();
+    this.activeUsersPresent = Number(this.activeUsers$) * this.totalUsersPresent;
     this.inactiveUsers$ = this.summaryService.getAmountOfInactiveUsers();
-    console.log(`inactive: ${this.inactiveUsers$}`)
+    // console.log(`inactive: ${this.inactiveUsers$}`)
     this.inactiveUsersPresent = Number(this.inactiveUsers$) * this.totalUsersPresent;
-    this.enforcedUsers = this.summaryService.getAmountOfEnforcedUsers();
+    this.enforcedUsers$ = this.summaryService.getAmountOfEnforcedUsers();
     this.enforcedUsersPresent =
-      Number(this.enforcedUsers) * this.totalUsersPresent;
-    this.notEnforcedUsers = this.summaryService.getAmountOfNotEnforcedUsers();
+      Number(this.enforcedUsers$) * this.totalUsersPresent;
+    this.notEnforcedUsers$ = this.summaryService.getAmountOfNotEnforcedUsers();
     this.notEnforcedUsersPresent =
-      Number(this.notEnforcedUsers) * this.totalUsersPresent;
+      Number(this.notEnforcedUsers$) * this.totalUsersPresent;
   }
 }

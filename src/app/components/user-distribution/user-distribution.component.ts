@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { Chart, registerables } from 'chart.js';
-import { map } from 'rxjs';
+import { firstValueFrom, map } from 'rxjs';
 import { CHART_COLORS } from '../../extensions/utils';
 import { types, typesAmount } from '../../models/resUser.model';
 import { appEnv } from '../../../environment/app.environment';
@@ -25,7 +25,7 @@ export class UserDistributionComponent {
   async ngOnInit(): Promise<void> {
       
       const service = new UserDistributionService(this.http);
-      this.AllTypesRes = service.getAllType();
+      this.AllTypesRes = await firstValueFrom(service.getAllType());
         this.DATA_COUNT = this.AllTypesRes.length;
         this.alltypes = this.AllTypesRes.map((value: { type: string }) => value.type);
 

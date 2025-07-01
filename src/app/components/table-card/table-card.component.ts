@@ -78,9 +78,9 @@ export class TableCardComponent {
   ];
   filterInput: string = "";
   AllUsersRes!: [];
-  dataSource$: Observable<tableElements[]>;
-  allDataSource: Observable<tableElements[]>;
+  dataSource$!: Observable<tableElements[]>;
+  allDataSource!: Observable<tableElements[]>;
   pageSize = 10;
   pageIndex = 1;
-  totalItems$: Observable<number>;
+  totalItems$!: Observable<number>;
 }
