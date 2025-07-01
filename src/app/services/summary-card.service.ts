@@ -7,36 +7,48 @@ import { Injectable } from '@angular/core';
 class SummaryCardService {
   constructor(private http: HttpClient) {}
 
-  getAmountOfUsers = (): number => {
-    let totalUsers = 0;
-    this.http
-      .get<string>(`${appEnv.baseUrl}ad-users/get-amount`)
-      .subscribe((buffer) => {
-        totalUsers = Number(buffer);
-      });
+  getAmountOfUsers = () => {
+    return this.http
+    .get<string>(`${appEnv.baseUrl}ad-users/get-amount`).pipe(
+      map((item)=> Number(item))
+    )
+    // let totalUsers = 0;
+    // this.http
+    //   .get<string>(`${appEnv.baseUrl}ad-users/get-amount`)
+    //   .subscribe((buffer) => {
+    //     totalUsers = Number(buffer);
+    //   });
 
-    return totalUsers;
+    // return totalUsers;
   };
 
-  getAmountOfDisabledUsers = (): number => {
-    let disabledUsers = 0;
-    this.http
-      .get<string>(`${appEnv.baseUrl}ad-users/get-disabled-users-amount`)
-      .subscribe((buffer) => {
-        disabledUsers = Number(buffer);
-      });
-    return disabledUsers;
+  getAmountOfDisabledUsers = () => {
+    return this.http
+    .get<string>(`${appEnv.baseUrl}ad-users/get-disabled-users-amount`).pipe(
+      map((item)=> Number(item))
+    )
+    // let disabledUsers = 0;
+    // this.http
+    //   .get<string>(`${appEnv.baseUrl}ad-users/get-disabled-users-amount`)
+    //   .subscribe((buffer) => {
+    //     disabledUsers = Number(buffer);
+    //   });
+    // return disabledUsers;
   };
 
-  getAmountOfAactiveUsers = (): number => {
-    let activeUsers = 0;
+  getAmountOfAactiveUsers = () => {
+    return this.http
+      .get<string>(`${appEnv.baseUrl}ad-users/get-active-users-amount`).pipe(
+        map((item)=> Number(item))
+      )
+    // let activeUsers = 0;
 
-    this.http
-      .get<string>(`${appEnv.baseUrl}ad-users/get-active-users-amount`)
-      .subscribe((buffer) => {
-        activeUsers = Number(buffer);
-      });
-    return activeUsers;
+    // this.http
+    //   .get<string>(`${appEnv.baseUrl}ad-users/get-active-users-amount`)
+    //   .subscribe((buffer) => {
+    //     activeUsers = Number(buffer);
+    //   });
+    // return activeUsers;
   };
 
   getAmountOfInactiveUsers = () => {
@@ -51,24 +63,32 @@ class SummaryCardService {
     // return inactiveUsers;
   };
 
-  getAmountOfEnforcedUsers = (): number => {
-    let enforcedUsers = 0;
-    this.http
-      .get<string>(`${appEnv.baseUrl}ad-users/get-enforced-users-amount`)
-      .subscribe((buffer) => {
-        enforcedUsers = Number(buffer);
-      });
-    return enforcedUsers;
+  getAmountOfEnforcedUsers = () => {
+    return this.http
+      .get<string>(`${appEnv.baseUrl}ad-users/get-enforced-users-amount`).pipe(
+        map((item)=> Number(item))
+      )
+    // let enforcedUsers = 0;
+    // this.http
+    //   .get<string>(`${appEnv.baseUrl}ad-users/get-enforced-users-amount`)
+    //   .subscribe((buffer) => {
+    //     enforcedUsers = Number(buffer);
+    //   });
+    // return enforcedUsers;
   };
 
-  getAmountOfNotEnforcedUsers = (): number => {
-    let notEnforcedUsers = 0;
-    this.http
-      .get<string>(`${appEnv.baseUrl}ad-users/get-not-enforced-users-amount`)
-      .subscribe((buffer) => {
-        notEnforcedUsers = Number(buffer);
-      });
-    return notEnforcedUsers;
+  getAmountOfNotEnforcedUsers = () => {
+    return this.http
+      .get<string>(`${appEnv.baseUrl}ad-users/get-not-enforced-users-amount`).pipe(
+        map((item)=> Number(item))
+      )
+  //   let notEnforcedUsers = 0;
+  //   this.http
+  //     .get<string>(`${appEnv.baseUrl}ad-users/get-not-enforced-users-amount`)
+  //     .subscribe((buffer) => {
+  //       notEnforcedUsers = Number(buffer);
+  //     });
+  //   return notEnforcedUsers;
   };
 }
 

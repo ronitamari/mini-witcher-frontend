@@ -58,6 +58,8 @@ export class LoginComponent {
     params = params.append('username', this.form.getRawValue().username);
     params = params.append('password', this.form.getRawValue().password);
     
+    console.log(params);
+    
     const service = new LoginService(this.http);
     service.login(params);
 

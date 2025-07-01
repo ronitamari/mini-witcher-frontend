@@ -13,17 +13,17 @@
   <mat-card-content>
     <div class="summary">
       <div class="row">
-        <div class="item item-1">
+        <div class="item item-1" *ngIf="totalUsers$ | async; let totalUsers">
           <h2>{{ totalUsers }}</h2>
           <h4>Total user in AD</h4>
         </div>
 
-        <div class="item item-2">
+        <div class="item item-2" *ngIf="enforcedUsers$ | async; let enforcedUsers">
           <h2>{{ enforcedUsers }}</h2>
           <h4>enforced users in AD</h4>
           <mat-progress-bar
             mode="determinate"
-            [value]="enforcedUsersPresent"
+            [value]="46"
           ></mat-progress-bar>
         </div>
       </div>
@@ -33,34 +33,34 @@
           <h4>inactive users in last 3 month</h4>
           <mat-progress-bar
             mode="determinate"
-            [value]="inactiveUsersPresent"
+            [value]="69"
           ></mat-progress-bar>
         </div>
-        <div class="item item-4">
+        <div class="item item-4" *ngIf="disabledUsers$ | async; let disabledUsers">
           <h2>{{ disabledUsers }}</h2>
           <h4>disabled users in AD</h4>
           <mat-progress-bar
             mode="determinate"
-            [value]="disabledUsersPresent"
+            [value]="47"
           ></mat-progress-bar>
         </div>
       </div>
       <div class="row">
-        <div class="item item-5">
+        <div class="item item-5" *ngIf="activeUsers$ | async; let activeUsers">
           <h2>{{ activeUsers }}</h2>
           <h4>active users (last 3 month)</h4>
           <mat-progress-bar
             mode="determinate"
-            [value]="activeUsersPresent"
+            [value]="25"
           ></mat-progress-bar>
         </div>
 
-        <div class="item item-6">
-          <h2>{{ notEnforcedUsers }}</h2>
+        <div class="item item-6" *ngIf="notEnforcedUsers$ | async; let notEnforcedUserss">
+          <h2>{{ notEnforcedUserss }}</h2>
           <h4>not enforced users in AD</h4>
           <mat-progress-bar
             mode="determinate"
-            [value]="notEnforcedUsersPresent"
+            [value]="47"
           ></mat-progress-bar>
         </div>
       </div>
